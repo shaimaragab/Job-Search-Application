@@ -27,7 +27,7 @@ export const getUserProfile = asyncHandler(async (req, res, next) => {
 export const shareProfile = asyncHandler(async (req, res, next) => {
     const { profileId } = req.params;
   
-    const user = await userModel.findOne({ _id: profileId, isDeleted: {$exists:false} })
+    const user = await userModel.findOne({ _id: profileId, isDeleted: {$exists:false} ,bannedAt: {$exists:false}})
   
     if (!user) {
       return next(new Error("user not found ", { cause: 404 }));
